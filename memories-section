@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 ¿Me amas? - Stitch Love 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header con título */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #ffb3ff;
+            font-style: italic;
+        }
+
+        /* Galería de fotos */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .photo-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Frases de amor */
+        .love-quotes {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .quote-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .quote-text {
+            font-size: 1.5em;
+            color: white;
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.4;
+        }
+
+        .quote-author {
+            font-size: 1em;
+            color: #ffb3ff;
+            font-weight: bold;
+        }
+
+        .quote-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Stitch y pregunta principal */
+        .main-question {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .stitch-image {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="%23006bb3"/><circle cx="80" cy="80" r="15" fill="black"/><circle cx="120" cy="80" r="15" fill="black"/><ellipse cx="100" cy="120" rx="20" ry="10" fill="black"/><path d="M60 60 Q100 40 140 60" stroke="black" stroke-width="3" fill="none"/><path d="M60 140 Q100 160 140 140" stroke="black" stroke-width="3" fill="none"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: bounce 2s infinite;
+        }
+
+        .question {
+            font-size: 2.5em;
+            color: white;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+            position: relative;
+            height: 80px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .btn-si {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+        }
+
+        .btn-si:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(45deg, #4ecdc4, #6dd5ed);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-no:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sección de recuerdos */
+        .memories-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .memories-title {
+            text-align: center;
+            font-size: 2em;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .memory-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .memory-date {
+            font-size: 0.9em;
+            color: #ffb3ff;
+            margin-bottom: 10px;
+        }
+
+        .memory-text {
+            color: white;
+            line-height: 1.5;
+        }
+
+        /* Celebración */
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 20, 147, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .celebration h1 {
+            font-size: 4em;
+            color: white;
+            margin-bottom: 20px;
+            animation: pulse 1s infinite;
+            text-align: center;
+        }
+
+        .celebration-message {
+            font-size: 1.5em;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .heart {
+            font-size: 3em;
+            color: red;
+            animation: heartbeat 1s infinite;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2em;
+            color: red;
+            animation: floatUp 3s linear infinite;
+        }
+
+        /* Animaciones */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .question {
+                font-size: 2em;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+                height: auto;
+                gap: 20px;
+            }
+            
+            .photo-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💕 Nuestro Amor 💕</h1>
+            <p>Una página especial para alguien especial</p>
+        </div>
+
+        <!-- Galería de fotos -->
+        <div class="photo-gallery">
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    📸
+                </div>
+                <p style="color: white; text-align: center; font-style: italic;">
+                    "Aquí va nuestra primera foto juntos"
+                </p>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    💕
+                </div>
+                <p style="color: white; text-align: center; font-style: italic;">
+                    "Nuestro momento más feliz"
+                </p>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    🌟
+                </div>
+                <p style="color: white; text-align: center; font-style: italic;">
+                    "Cuando supe que eras especial"
+                </p>
+            </div>
+        </div>
+
+        <!-- Frases de amor -->
+        <div class="love-quotes">
+            <div class="quote-container">
+                <div class="quote-text" id="quoteText">
+                    "Eres mi persona favorita, mi lugar seguro y mi hogar."
+                </div>
+                <div class="quote-author" id="quoteAuthor">
+                    - Para ti, con amor
+                </div>
+            </div>
+            <div class="quote-navigation">
+                <button class="nav-btn" onclick="previousQuote()">‹</button>
+                <button class="nav-btn" onclick="nextQuote()">›</button>
+            </div>
+        </div>
+
+        <!-- Recuerdos especiales -->
+        <div class="memories-section">
+            <div class="memories-title">💭 Nuestros Recuerdos</div>
+            <div class="memory-item">
+                <div class="memory-date">Primera vez que nos vimos</div>
+                <div class="memory-text">
+                    Ese día supe que algo especial estaba comenzando. Tu sonrisa iluminó mi mundo.
+                </div>
+            </div>
+            <div class="memory-item">
+                <div class="memory-date">Nuestra primera conversación</div>
+                <div class="memory-text">
+                    Hablamos durante horas y sentí como si te conociera de toda la vida.
+                </div>
+            </div>
+            <div class="memory-item">
+                <div class="memory-date">Cuando me di cuenta</div>
+                <div class="memory-text">
+                    En ese momento exacto supe que quería tenerte en mi vida para siempre.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta principal con Stitch -->
+        <div class="main-question">
+            <div class="stitch-image"></div>
+            <div class="question">¿Me amas?</div>
+            <div class="buttons-container">
+                <button class="btn btn-si" onclick="respuestaSi()">Sí ❤️</button>
+                <button class="btn btn-no" id="btnNo" onclick="respuestaNo()">No 💔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebración -->
+    <div class="celebration" id="celebration">
+        <h1>¡Sabía que me amabas! 💕</h1>
+        <div class="celebration-message">
+            Eres lo mejor que me ha pasado en la vida. Gracias por ser mi persona especial, 
+            por todos los momentos compartidos y por todos los que están por venir. 
+            Te amo más de lo que las palabras pueden expresar.
+        </div>
+        <div class="heart">❤️💙💜💚💛</div>
+        <div class="floating-hearts" id="floatingHearts"></div>
+    </div>
+
+    <script>
+        // Frases de amor
+        const quotes = [
+            {
+                text: "Eres mi persona favorita, mi lugar seguro y mi hogar.",
+                author: "- Para ti, con amor"
+            },
+            {
+                text: "Cada día contigo es un nuevo capítulo de nuestra historia de amor.",
+                author: "- Nuestro cuento"
+            },
+            {
+                text: "No necesito el paraíso, ya lo encontré en tus ojos.",
+                author: "- Tu admirador secreto"
+            },
+            {
+                text: "Eres la razón por la que creo en el amor verdadero.",
+                author: "- Con todo mi corazón"
+            },
+            {
+                text: "Contigo aprendí que el amor no es solo un sentimiento, es un hogar.",
+                author: "- Mi corazón"
+            },
+            {
+                text: "Eres mi café de las mañanas y mi luna de las noches.",
+                author: "- Siempre tuyo"
+            },
+            {
+                text: "Si tuviera que elegir de nuevo, te elegiría en cada vida.",
+                author: "- Para toda la eternidad"
+            }
+        ];
+
+        let currentQuoteIndex = 0;
+
+        function nextQuote() {
+            currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+            updateQuote();
+        }
+
+        function previousQuote() {
+            currentQuoteIndex = (currentQuoteIndex - 1 + quotes.length) % quotes.length;
+            updateQuote();
+        }
+
+        function updateQuote() {
+            document.getElementById('quoteText').textContent = quotes[currentQuoteIndex].text;
+            document.getElementById('quoteAuthor').textContent = quotes[currentQuoteIndex].author;
+        }
+
+        // Botón "No" esquivo
+        const btnNo = document.getElementById('btnNo');
+        let moveCount = 0;
+
+        function moverBotonNo() {
+            const container = document.querySelector('.buttons-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            const maxX = containerRect.width - btnNo.offsetWidth;
+            const maxY = containerRect.height - btnNo.offsetHeight;
+            
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = newX + 'px';
+            btnNo.style.top = newY + 'px';
+            
+            moveCount++;
+            
+            if (moveCount > 3) {
+                btnNo.style.transform = 'scale(0.8)';
+                btnNo.innerHTML = 'No 😢';
+            }
+            
+            if (moveCount > 6) {
+                btnNo.style.transform = 'scale(0.6)';
+                btnNo.innerHTML = 'No... 😭';
+            }
+        }
+
+        btnNo.addEventListener('mouseenter', moverBotonNo);
+        btnNo.addEventListener('touchstart', moverBotonNo);
+
+        function respuestaSi() {
+            document.getElementById('celebration').style.display = 'flex';
+            crearCorazonesFlotantes();
+        }
+
+        function respuestaNo() {
+            moverBotonNo();
+            
+            const messages = [
+                '¡No puedes escapar de mi amor! 💕',
+                '¡Inténtalo de nuevo! 😊',
+                '¡Sé que me amas! 💖',
+                '¡El botón "Sí" te está esperando! 🥰'
+            ];
+            
+            setTimeout(() => {
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                alert(randomMessage);
+            }, 500);
+        }
+
+        function crearCorazonesFlotantes() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['❤️', '💙', '💜', '💚', '💛', '🧡', '💕', '💖', '💗', '💝'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }, 300);
+        }
+
+        // Auto-cambio de frases cada 5 segundos
+        setInterval(nextQuote, 5000);
+    </script>
+</body>
+</html>
